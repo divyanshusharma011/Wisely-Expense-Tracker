@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisely | Smart Personal Finance & Expense Tracker</title>
+    <meta name="description"
+        content="Wisely helps you track expenses, manage budgets, and grow your wealth. The smartest way to take control of your money.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header id="site-header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="#" class="logo-text">
+                    <span class="w">W</span>isely
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <a href="/login" class="login" id="login-btn">Login</a>
+                    <a href="/signup" class="btn btn-primary" id="get-started-btn">Get Started Free</a>
+                </div>
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="/signup" class="btn btn-primary" style="display:inline-block;margin-top:8px;">Get
+                        Started
+                        Free</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <main>
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">🚀 #1 Rated Expense Tracker</div>
+                <h1>Take Control of <span class="gradient-text">Your Money</span></h1>
+                <p class="hero-subtitle">Track every expense, set smart budgets, and watch your wealth grow — all in one
+                    beautiful dashboard. Wisely makes personal finance effortless.</p>
+                <div class="hero-cta">
+                    <a href="/signup" class="btn btn-primary btn-lg" id="hero-cta-btn">Start For Free</a>
+                    <a href="#how-it-works" class="btn btn-outline btn-lg" id="hero-demo-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        See How It Works
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <div class="trust-avatars">
+                        <div class="avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">A</div>
+                        <div class="avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">S</div>
+                        <div class="avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">M</div>
+                        <div class="avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">R</div>
+                    </div>
+                    <p><strong>12,000+</strong> people already managing money wisely</p>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-card card-balance floating-card" id="card-balance">
+                    <div class="card-icon card-icon-green">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="6" y1="3" x2="18" y2="3" />
+                            <line x1="6" y1="8" x2="18" y2="8" />
+                            <line x1="14" y1="3" x2="8" y2="21" />
+                        </svg>
+                    </div>
+                    <span class="card-label">Total Balance</span>
+                    <span class="card-value">₹3,54,250</span>
+                    <span class="card-change positive">↑ 12.5% this month</span>
+                </div>
+                <div class="dashboard-card card-spending floating-card delay-1" id="card-spending">
+                    <div class="card-icon card-icon-blue">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                    </div>
+                    <span class="card-label">Monthly Spending</span>
+                    <span class="card-value">₹18,450</span>
+                    <div class="mini-bar">
+                        <div class="mini-bar-fill" style="width:62%"></div>
+                    </div>
+                    <span class="card-sub">62% of budget used</span>
+                </div>
+                <div class="dashboard-card card-savings floating-card delay-2" id="card-savings">
+                    <div class="card-icon card-icon-purple">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </div>
+                    <span class="card-label">Savings Goal</span>
+                    <span class="card-value">₹1,50,000</span>
+                    <div class="mini-bar bar-purple">
+                        <div class="mini-bar-fill" style="width:84%"></div>
+                    </div>
+                    <span class="card-sub">84% reached</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= STATS BAR ================= -->
+    <section class="stats-bar" id="stats-bar">
+        <div class="container">
+            <div class="stat-item"><span class="stat-number" data-target="12000">0</span><span
+                    class="stat-suffix">+</span><span class="stat-label">Active Users</span></div>
+            <div class="stat-item"><span class="stat-number" data-target="50">0</span><span
+                    class="stat-suffix">M+</span><span class="stat-label">Transactions Tracked</span></div>
+            <div class="stat-item"><span class="stat-number" data-target="4.9">0</span><span
+                    class="stat-suffix">★</span><span class="stat-label">User Rating</span></div>
+            <div class="stat-item"><span class="stat-number" data-target="256">0</span><span
+                    class="stat-suffix">-bit</span><span class="stat-label">Encryption</span></div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Features</span>
+                <h2>Everything You Need to <span class="gradient-text">Master Your Finances</span></h2>
+                <p>Wisely combines powerful tracking, smart budgeting, and beautiful reports to give you full control.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" id="feature-tracking">
+                    <div class="feature-icon icon-blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                    </div>
+                    <h3>Expense Tracking</h3>
+                    <p>Automatically categorize and track every transaction across all your accounts in real time.</p>
+                </div>
+                <div class="feature-card" id="feature-budgets">
+                    <div class="feature-icon icon-green">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 12a9 9 0 1 1-9-9" />
+                            <path d="M21 3v9h-9" />
+                        </svg>
+                    </div>
+                    <h3>Smart Budgets</h3>
+                    <p>Set flexible budgets by category. Get alerts before you overspend and stay on track effortlessly.
+                    </p>
+                </div>
+                <div class="feature-card" id="feature-goals">
+                    <div class="feature-icon icon-purple">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                    </div>
+                    <h3>Savings Goals</h3>
+                    <p>Set goals for vacations, emergencies, or big purchases and track your progress visually.</p>
+                </div>
+                <div class="feature-card" id="feature-reports">
+                    <div class="feature-icon icon-orange">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10" />
+                            <line x1="12" y1="20" x2="12" y2="4" />
+                            <line x1="6" y1="20" x2="6" y2="14" />
+                        </svg>
+                    </div>
+                    <h3>Visual Reports</h3>
+                    <p>Beautiful charts and breakdowns that show exactly where your money goes each month.</p>
+                </div>
+                <div class="feature-card" id="feature-security">
+                    <div class="feature-icon icon-red">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                    </div>
+                    <h3>Bank-Level Security</h3>
+                    <p>256-bit encryption and read-only access. Your data is safer than a Swiss vault.</p>
+                </div>
+                <div class="feature-card" id="feature-family">
+                    <div class="feature-icon icon-teal">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>Family Sharing</h3>
+                    <p>Manage household finances together. Shared views with "yours, mine & ours" labels.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DASHBOARD PREVIEW ================= -->
+    <section class="dashboard-preview" id="dashboard-preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Dashboard</span>
+                <h2>Your Finances, <span class="gradient-text">One Beautiful View</span></h2>
+                <p>A customizable dashboard that puts everything you need right at your fingertips.</p>
+            </div>
+            <div class="preview-wrapper">
+                <img src="..//assets/dashboard-preview.png" data-video="..//assets/dashboard-preview.webp" alt="Wisely Dashboard Preview" class="preview-img"
+                    id="preview-img" style="cursor: pointer;">
+                <div class="preview-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2>Get Started in <span class="gradient-text">3 Simple Steps</span></h2>
+                <p>From signup to financial clarity in under 5 minutes.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card" id="step-1">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <h3>Create Your Account</h3>
+                    <p>Sign up for free in seconds. No credit card required to start tracking.</p>
+                </div>
+                <div class="step-connector"><svg width="60" height="24" viewBox="0 0 60 24">
+                        <path d="M0 12h50m-8-8l8 8-8 8" fill="none" stroke="#cbd5e1" stroke-width="2" />
+                    </svg></div>
+                <div class="step-card" id="step-2">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <line x1="2" y1="10" x2="22" y2="10" />
+                        </svg>
+                    </div>
+                    <h3>Add Your Expenses</h3>
+                    <p>Manually log transactions or connect accounts. We categorize everything automatically.</p>
+                </div>
+                <div class="step-connector"><svg width="60" height="24" viewBox="0 0 60 24">
+                        <path d="M0 12h50m-8-8l8 8-8 8" fill="none" stroke="#cbd5e1" stroke-width="2" />
+                    </svg></div>
+                <div class="step-card" id="step-3">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
+                    </div>
+                    <h3>Watch Your Wealth Grow</h3>
+                    <p>Get insights, set goals, and make smarter decisions with visual reports and alerts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2>Loved by <span class="gradient-text">Thousands</span></h2>
+                <p>See what our users say about managing their money with Wisely.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" id="testimonial-1">
+                    <div class="stars">★★★★★</div>
+                    <p>"Wisely completely changed how I handle money. I went from living paycheck to paycheck to saving
+                        ₹15,000/month."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">P</div>
+                        <div><strong>Priya Sharma</strong><span>Product Designer</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" id="testimonial-2">
+                    <div class="stars">★★★★★</div>
+                    <p>"The family sharing feature is incredible. My partner and I finally see eye to eye on our
+                        budget."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">R</div>
+                        <div><strong>Rahul Mehta</strong><span>Software Engineer</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" id="testimonial-3">
+                    <div class="stars">★★★★★</div>
+                    <p>"Beautiful interface, powerful features. I've tried 10+ finance apps and Wisely is by far the
+                        best."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">A</div>
+                        <div><strong>Anita Desai</strong><span>Freelancer</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FAQ</span>
+                <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item" id="faq-1">
+                    <button class="faq-question">Is Wisely free to use?<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer">
+                        <p>Yes! Wisely offers a generous free plan with expense tracking, budgets, and reports. Premium
+                            features like family sharing and advanced analytics are available with Wisely Pro.</p>
+                    </div>
+                </div>
+                <div class="faq-item" id="faq-2">
+                    <button class="faq-question">Is my financial data secure?<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We use 256-bit bank-level encryption, read-only access to your accounts, and are
+                            SOC 2 compliant. Your data is never sold to third parties.</p>
+                    </div>
+                </div>
+                <div class="faq-item" id="faq-3">
+                    <button class="faq-question">Can I use Wisely with my partner or family?<span
+                            class="faq-toggle">+</span></button>
+                    <div class="faq-answer">
+                        <p>Yes! With Wisely Pro, you can invite family members to shared views. Each person gets their
+                            own login while sharing household financial data.</p>
+                    </div>
+                </div>
+                <div class="faq-item" id="faq-4">
+                    <button class="faq-question">How do I track expenses?<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer">
+                        <p>You can manually add expenses with categories and tags, or connect your bank accounts for
+                            automatic transaction imports. Wisely intelligently categorizes everything.</p>
+                    </div>
+                </div>
+                <div class="faq-item" id="faq-5">
+                    <button class="faq-question">Can I cancel anytime?<span class="faq-toggle">+</span></button>
+                    <div class="faq-answer">
+                        <p>Of course. There are no long-term contracts. You can upgrade, downgrade, or cancel your
+                            subscription at any time from your account settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA BANNER ================= -->
+    <section class="cta-banner" id="cta-banner">
+        <div class="container">
+            <h2>Ready to Take Control of Your Finances?</h2>
+            <p>Join 12,000+ users who are spending wisely and saving more every month.</p>
+            <a href="/signup" class="btn btn-white btn-lg" id="cta-final-btn">Get Started Free →</a>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer id="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo-text footer-logo-text">
+                        <span class="w">W</span>isely
+                    </a>
+                    <p>The smartest way to manage your money. Track, budget, and grow your wealth.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wisely. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
+
