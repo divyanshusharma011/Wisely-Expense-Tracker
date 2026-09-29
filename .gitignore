@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment — never commit secrets
+.env
+
+# SQLite database file
+server/db/wisely.db
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
