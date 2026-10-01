@@ -10,9 +10,7 @@
 //  Replaces the old wisely_users / wisely_session localStorage keys.
 // ============================================================
 
-const API_BASE = (typeof window !== 'undefined' && window.location && window.location.origin && !window.location.origin.startsWith('file:') && window.location.origin !== 'null')
-    ? `${window.location.origin}/api`
-    : 'http://localhost:5000/api';
+const API_BASE = '/api';
 
 // ── Token helpers ────────────────────────────────────────────────
 
