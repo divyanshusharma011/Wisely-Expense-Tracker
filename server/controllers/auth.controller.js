@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt    = require('jsonwebtoken');
 const { getDb, persist } = require('../db/database');
 const config = require('../config/config');
+const { sendWelcomeEmail, sendLoginNotificationEmail } = require('../services/email.service');
 
 // ----------------------------------------------------------------
 //  Helper — sign a JWT for a user row
@@ -73,6 +74,11 @@ async function register(req, res) {
 
         const token = signToken(user);
 
+        // Send welcome email (fire and forget — don't block the response)
+        sendWelcomeEmail(user.email, user.first_name).catch(err =>
+            console.error('[email] Welcome email failed:', err.message)
+        );
+
         return res.status(201).json({
             success: true,
             message: 'Account created successfully.',
@@ -117,6 +123,11 @@ async function login(req, res) {
         }
 
         const token = signToken(user, remember_me);
+
+        // Send login notification email (fire and forget)
+        sendLoginNotificationEmail(user.email, user.first_name).catch(err =>
+            console.error('[email] Login notification failed:', err.message)
+        );
 
         return res.status(200).json({
             success: true,

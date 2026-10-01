@@ -59,11 +59,11 @@ const { initDatabase } = require('./server/db/database');
         app.use('/js',     express.static(path.join(clientRoot, 'js')));
         app.use('/assets', express.static(path.join(clientRoot, 'assets')));
 
-        // Page routes
-        app.get('/',          (req, res) => res.sendFile(path.join(clientPages, 'index.html')));
-        app.get('/login',     (req, res) => res.sendFile(path.join(clientPages, 'login.html')));
-        app.get('/signup',    (req, res) => res.sendFile(path.join(clientPages, 'signup.html')));
-        app.get('/dashboard', (req, res) => res.sendFile(path.join(clientPages, 'dashboard.html')));
+        // Page routes (supports both clean URLs and .html extensions)
+        app.get(['/', '/index.html'],              (req, res) => res.sendFile(path.join(clientPages, 'index.html')));
+        app.get(['/login', '/login.html'],         (req, res) => res.sendFile(path.join(clientPages, 'login.html')));
+        app.get(['/signup', '/signup.html'],       (req, res) => res.sendFile(path.join(clientPages, 'signup.html')));
+        app.get(['/dashboard', '/dashboard.html'], (req, res) => res.sendFile(path.join(clientPages, 'dashboard.html')));
 
         // --------------------------------------------------------
         //  API routes
@@ -73,6 +73,9 @@ const { initDatabase } = require('./server/db/database');
         app.use('/api/budgets',      require('./server/routes/budgets.routes'));
         app.use('/api/savings',      require('./server/routes/savings.routes'));
         app.use('/api/dashboard',    require('./server/routes/dashboard.routes'));
+
+        // Google OAuth routes (not under /api — browser redirects)
+        app.use('/auth/google',      require('./server/routes/google.routes'));
 
         // --------------------------------------------------------
         //  Health check

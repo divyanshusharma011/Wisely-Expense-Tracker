@@ -10,7 +10,9 @@
 //  Replaces the old wisely_users / wisely_session localStorage keys.
 // ============================================================
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = (typeof window !== 'undefined' && window.location && window.location.origin && !window.location.origin.startsWith('file:') && window.location.origin !== 'null')
+    ? `${window.location.origin}/api`
+    : 'http://localhost:5000/api';
 
 // ── Token helpers ────────────────────────────────────────────────
 
@@ -64,7 +66,7 @@ const WiselyAuth = {
  *  - Base URL prepended
  *  - Content-Type: application/json
  *  - Authorization: Bearer <token>  (if token exists)
- *  - Automatic 401 → logout + redirect to login.html
+ *  - Automatic 401 → logout + redirect to /login
  *
  * Returns: { success, data, message, status }
  */
@@ -89,9 +91,12 @@ async function apiRequest(path, options = {}) {
         if (response.status === 401) {
             WiselyAuth.clearSession();
             // Only redirect if we're not already on an auth page
-            if (!window.location.pathname.endsWith('login.html')
-                && !window.location.pathname.endsWith('signup.html')) {
-                window.location.href = 'login.html';
+            const path = window.location.pathname;
+            if (!path.endsWith('login.html')
+                && !path.endsWith('signup.html')
+                && !path.endsWith('/login')
+                && !path.endsWith('/signup')) {
+                window.location.href = '/login';
             }
         }
 

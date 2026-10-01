@@ -1025,12 +1025,32 @@
             background-size: 9px;
             transition: border-color 0.2s;
         }
-        .tx-filter-select:focus { border-color: var(--primary); }
         .tx-count {
             font-size: 13px;
             color: var(--text-muted);
             white-space: nowrap;
             margin-left: auto;
+        }
+        .btn-export-csv {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--surface);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-export-csv:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
         /* ── Toast notification ────────────────────────────────────── */
@@ -1609,6 +1629,10 @@
                             <option value="highest">Highest Amount</option>
                             <option value="lowest">Lowest Amount</option>
                         </select>
+                        <button type="button" class="btn-export-csv" id="export-csv-btn" title="Export filtered transactions to CSV">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Export CSV
+                        </button>
                         <span class="tx-count" id="tx-count"></span>
                     </div>
                     <div class="transaction-table-wrapper">
@@ -1707,7 +1731,10 @@
                     <input type="date" id="goal-date" class="form-input">
                 </div>
                 <p id="goal-error" style="color:var(--danger);font-size:13px;margin-bottom:12px;display:none;"></p>
-                <button type="submit" class="btn-submit-tx" id="goal-submit-btn">Save Goal</button>
+                <div style="display:flex;gap:10px;">
+                    <button type="submit" class="btn-submit-tx" id="goal-submit-btn" style="flex:1;">Save Goal</button>
+                    <button type="button" id="goal-delete-btn" style="display:none;padding:12px 18px;background:#fee2e2;color:#dc2626;border:none;border-radius:var(--radius-md);font-weight:600;cursor:pointer;font-family:inherit;">Delete</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1877,8 +1904,25 @@
         // ============================================================
 
         // ── Auth guard ──────────────────────────────────────────────
+        // Handle Google OAuth redirect — token comes via URL params
+        (function handleGoogleCallback() {
+            const params = new URLSearchParams(window.location.search);
+            const token  = params.get('token');
+            if (token) {
+                const user = {
+                    id:         parseInt(params.get('id')),
+                    first_name: params.get('first_name'),
+                    last_name:  params.get('last_name'),
+                    email:      params.get('email'),
+                };
+                WiselyAuth.saveSession(token, user, true);
+                // Clean URL — remove token from address bar
+                window.history.replaceState({}, document.title, '/dashboard');
+            }
+        })();
+
         const cachedUser = WiselyAuth.getUser();
-        if (!WiselyAuth.isLoggedIn()) { window.location.href = 'login.html'; }
+        if (!WiselyAuth.isLoggedIn()) { window.location.href = '/login'; }
 
         function applyUserToUI(u) {
             document.getElementById('user-name').textContent   = u.first_name + ' ' + u.last_name;
@@ -1888,7 +1932,7 @@
         }
         if (cachedUser) applyUserToUI(cachedUser);
         AuthAPI.me().then(r => {
-            if (!r.success) { WiselyAuth.clearSession(); window.location.href = 'login.html'; }
+            if (!r.success) { WiselyAuth.clearSession(); window.location.href = '/login'; }
             else applyUserToUI(r.data.user);
         });
 
@@ -2092,9 +2136,17 @@
             pendingDeleteId   = id;
             pendingDeleteType = type;
             const box = confirmModal.querySelector('.confirm-box p');
-            box.textContent = type === 'budget'
-                ? 'This will remove the budget limit for this category. Spending data will not be affected.'
-                : 'This action cannot be undone. The transaction will be permanently removed from your records.';
+            const h3  = confirmModal.querySelector('.confirm-box h3');
+            if (type === 'budget') {
+                if (h3) h3.textContent = 'Delete Budget?';
+                box.textContent = 'This will remove the budget limit for this category. Spending data will not be affected.';
+            } else if (type === 'goal') {
+                if (h3) h3.textContent = 'Delete Savings Goal?';
+                box.textContent = 'This will remove your current savings goal.';
+            } else {
+                if (h3) h3.textContent = 'Delete Transaction?';
+                box.textContent = 'This action cannot be undone. The transaction will be permanently removed from your records.';
+            }
             confirmModal.classList.add('active');
         }
         function hideConfirm() { pendingDeleteId = null; confirmModal.classList.remove('active'); }
@@ -2106,18 +2158,32 @@
             confirmDeleteBtn.textContent = 'Deleting…';
             confirmDeleteBtn.disabled    = true;
 
-            const result = pendingDeleteType === 'budget'
-                ? await BudgetAPI.remove(pendingDeleteId)
-                : await TransactionAPI.remove(pendingDeleteId);
+            let result;
+            if (pendingDeleteType === 'budget') {
+                result = await BudgetAPI.remove(pendingDeleteId);
+            } else if (pendingDeleteType === 'goal') {
+                result = await SavingsAPI.remove(pendingDeleteId);
+            } else {
+                result = await TransactionAPI.remove(pendingDeleteId);
+            }
 
             confirmDeleteBtn.textContent = 'Yes, Delete';
             confirmDeleteBtn.disabled    = false;
             hideConfirm();
 
             if (result.success) {
-                showToast(pendingDeleteType === 'budget' ? 'Budget removed.' : 'Transaction deleted.', 'success');
-                if (pendingDeleteType === 'budget') await loadBudgets();
-                else await refreshAll();
+                if (pendingDeleteType === 'budget') {
+                    showToast('Budget removed.', 'success');
+                    await loadBudgets();
+                } else if (pendingDeleteType === 'goal') {
+                    showToast('Savings goal removed.', 'success');
+                    await loadSavingsGoal();
+                    const summaryR = await DashboardAPI.getSummary(activePeriod);
+                    if (summaryR.success) renderSummary(summaryR.data);
+                } else {
+                    showToast('Transaction deleted.', 'success');
+                    await refreshAll();
+                }
             } else {
                 showToast(result.message || 'Failed to delete.', 'error');
             }
@@ -2521,6 +2587,7 @@
         const goalForm      = document.getElementById('goal-form');
         const goalError     = document.getElementById('goal-error');
         const goalSubmitBtn = document.getElementById('goal-submit-btn');
+        const goalDeleteBtn = document.getElementById('goal-delete-btn');
 
         function showGoalError(msg) { goalError.textContent=msg; goalError.style.display='block'; }
         function hideGoalError()    { goalError.textContent='';  goalError.style.display='none';  }
@@ -2533,15 +2600,25 @@
             document.getElementById('goal-modal-title').textContent = prefill.id ? 'Edit Savings Goal' : 'Set Savings Goal';
             goalSubmitBtn.textContent    = prefill.id ? 'Update Goal' : 'Save Goal';
             goalSubmitBtn.dataset.editId = prefill.id || '';
+            if (goalDeleteBtn) goalDeleteBtn.style.display = prefill.id ? 'inline-block' : 'none';
             goalModal.classList.add('active');
         }
-        const closeGoalModal = () => { goalModal.classList.remove('active'); goalForm.reset(); hideGoalError(); goalSubmitBtn.dataset.editId=''; };
+        const closeGoalModal = () => { goalModal.classList.remove('active'); goalForm.reset(); hideGoalError(); goalSubmitBtn.dataset.editId=''; if (goalDeleteBtn) goalDeleteBtn.style.display='none'; };
         document.getElementById('open-goal-modal-btn').addEventListener('click', () => {
             const g = window._activeGoal;
             openGoalModal(g ? { id:g.id, name:g.name, target_amount:g.target_amount, target_date:g.target_date||'' } : {});
         });
         document.getElementById('close-goal-modal-btn').addEventListener('click', closeGoalModal);
         goalModal.addEventListener('click', e => { if (e.target===goalModal) closeGoalModal(); });
+
+        if (goalDeleteBtn) {
+            goalDeleteBtn.addEventListener('click', () => {
+                const editId = goalSubmitBtn.dataset.editId;
+                if (!editId) return;
+                closeGoalModal();
+                showConfirm(editId, 'goal');
+            });
+        }
 
         goalForm.addEventListener('submit', async e => {
             e.preventDefault(); hideGoalError();
@@ -2600,17 +2677,52 @@
             const errBanner = document.getElementById('tx-error-banner');
             const result = await DashboardAPI.getRecentTransactions(getFilterParams());
             if (!result.success) {
+                window._loadedTransactions = [];
                 txListBody.innerHTML = '';
                 emptyState.style.display = 'none';
                 if (errBanner) errBanner.classList.add('show');
                 return;
             }
             if (errBanner) errBanner.classList.remove('show');
+            window._loadedTransactions = result.data.transactions;
 
             // Re-render trend chart with same transactions
             renderTrendChart(result.data.transactions);
             renderTransactions(result.data.transactions, result.data.total);
         }
+
+        // ── Export to CSV ────────────────────────────────────────────
+        function exportTransactionsCSV() {
+            const rows = window._loadedTransactions || [];
+            if (!rows.length) {
+                showToast('No transactions to export.', 'info');
+                return;
+            }
+            const headers = ['ID', 'Date', 'Type', 'Category', 'Description', 'Payment Method', 'Amount (INR)'];
+            const csvRows = [
+                headers.join(','),
+                ...rows.map(tx => [
+                    tx.id,
+                    `"${tx.transaction_date}"`,
+                    `"${tx.type}"`,
+                    `"${tx.category}"`,
+                    `"${(tx.description || '').replace(/"/g, '""')}"`,
+                    `"${tx.payment_method}"`,
+                    tx.amount
+                ].join(','))
+            ];
+            const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `wisely_transactions_${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Exported transactions to CSV!', 'success');
+        }
+        document.getElementById('export-csv-btn')?.addEventListener('click', exportTransactionsCSV);
 
         // ── Full dashboard refresh ───────────────────────────────────
         async function refreshAll() {
@@ -2662,7 +2774,7 @@
         document.getElementById('logout-btn').addEventListener('click', async () => {
             await AuthAPI.logout();
             WiselyAuth.clearSession();
-            window.location.href = 'index.html';
+            window.location.href = '/';
         });
     </script>
 </body>
