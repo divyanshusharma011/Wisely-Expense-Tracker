@@ -13,6 +13,9 @@ const initSqlJs = require('sql.js');
 const DB_PATH     = path.join(__dirname, 'wisely.db');
 const SCHEMA_PATH = path.join(__dirname, 'schema.sql');
 
+// sql.js wasm file location — needed for Railway/production
+const WASM_PATH = path.join(require.resolve('sql.js'), '..', 'sql-wasm.wasm');
+
 // Singleton — module keeps one DB instance in memory
 let _db = null;
 
@@ -32,7 +35,9 @@ function persist(db) {
 async function initDatabase() {
     if (_db) return { db: _db, persist: () => persist(_db) };
 
-    const SQL = await initSqlJs();
+    const SQL = await initSqlJs({
+        locateFile: () => WASM_PATH,
+    });
 
     // Load existing file, or start with an empty database
     if (fs.existsSync(DB_PATH)) {
