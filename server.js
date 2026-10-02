@@ -27,12 +27,17 @@ const { initDatabase } = require('./server/db/database');
         // --------------------------------------------------------
         app.use(cors({
             origin: (origin, callback) => {
+                // Always allow same-origin requests (no origin header)
                 if (!origin || origin === 'null') return callback(null, true);
                 const allowed = [
                     ...config.cors.origins,
                     /^http:\/\/localhost(:\d+)?$/,
                     /^http:\/\/127\.0\.0\.1(:\d+)?$/,
                 ];
+                // Also allow the APP_URL origin automatically
+                if (process.env.APP_URL && origin === process.env.APP_URL) {
+                    return callback(null, true);
+                }
                 const ok = allowed.some(a =>
                     typeof a === 'string' ? a === origin : a.test(origin)
                 );
