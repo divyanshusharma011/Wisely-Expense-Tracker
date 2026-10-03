@@ -613,3 +613,111 @@ label {
         max-width: 100%;
     }
 }
+
+/* ================================================================
+   DARK MODE — Auth Pages
+================================================================ */
+[data-theme="dark"] {
+    --background: #0f172a;
+    --surface:    #1e293b;
+    --primary:    #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: rgba(59,130,246,0.12);
+    --success:    #22c55e;
+    --danger:     #f87171;
+    --warning:    #fbbf24;
+    --text:       #f1f5f9;
+    --text-light: #94a3b8;
+    --text-muted: #64748b;
+    --border:     #334155;
+    --gradient:   linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+[data-theme="dark"] body {
+    background: var(--background);
+    color: var(--text);
+}
+
+[data-theme="dark"] .auth-right {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .auth-form-container h1,
+[data-theme="dark"] .auth-form-container h2 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .auth-form-container p {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .form-label {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .form-input {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .form-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+[data-theme="dark"] .form-input::placeholder {
+    color: #475569;
+}
+
+[data-theme="dark"] .social-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .social-btn:hover {
+    background: #334155;
+}
+
+[data-theme="dark"] .divider span {
+    background: #0f172a;
+    color: #64748b;
+}
+
+[data-theme="dark"] .divider::before {
+    background: #334155;
+}
+
+[data-theme="dark"] .auth-switch {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .password-wrapper {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .toggle-password {
+    color: #64748b;
+}
+
+[data-theme="dark"] .toggle-password:hover {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .strength-bar {
+    background: #334155;
+}
+
+[data-theme="dark"] .pw-strength-text {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .checkbox-label {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .checkbox-label a {
+    color: #60a5fa;
+}

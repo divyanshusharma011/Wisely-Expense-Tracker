@@ -646,6 +646,201 @@
         }
 
         /* ================================================================
+           DARK MODE — Dashboard
+        ================================================================ */
+        [data-theme="dark"] {
+            --background:      #0f172a;
+            --surface:         #1e293b;
+            --primary:         #3b82f6;
+            --primary-light:   rgba(59,130,246,0.12);
+            --success:         #22c55e;
+            --success-light:   rgba(34,197,94,0.12);
+            --danger:          #f87171;
+            --danger-light:    rgba(248,113,113,0.12);
+            --warning:         #fbbf24;
+            --warning-light:   rgba(251,191,36,0.12);
+            --text:            #f1f5f9;
+            --text-light:      #94a3b8;
+            --text-muted:      #64748b;
+            --border:          #334155;
+            --shadow:          0 4px 20px rgba(0,0,0,0.3);
+            --shadow-hover:    0 10px 30px rgba(59,130,246,0.15);
+            --gradient:        linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+
+        [data-theme="dark"] body {
+            background: var(--background);
+            color: var(--text);
+        }
+
+        [data-theme="dark"] .dash-header {
+            background: #1e293b;
+            border-bottom-color: #334155;
+        }
+
+        [data-theme="dark"] .logo-text {
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .dash-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        [data-theme="dark"] .dash-panel {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        [data-theme="dark"] .dash-panel-header {
+            border-bottom-color: #334155;
+        }
+
+        [data-theme="dark"] .dash-panel-title {
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .dash-card-value {
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .dash-card-label {
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .transaction-table th {
+            color: #64748b;
+            border-bottom-color: #334155;
+        }
+
+        [data-theme="dark"] .transaction-table td {
+            border-bottom-color: #334155;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .transaction-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        [data-theme="dark"] .budget-progress-bar {
+            background: #334155;
+        }
+
+        [data-theme="dark"] .modal-content,
+        [data-theme="dark"] .confirm-box,
+        [data-theme="dark"] #budget-modal .modal-content,
+        [data-theme="dark"] #goal-modal .modal-content {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        [data-theme="dark"] .modal-title,
+        [data-theme="dark"] .confirm-box h3 {
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .confirm-box p {
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .form-group label {
+            color: #cbd5e1;
+        }
+
+        [data-theme="dark"] .form-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+        }
+
+        [data-theme="dark"] select.form-input option {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .btn-logout {
+            background: #1e293b;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .btn-logout:hover {
+            border-color: #f87171;
+            color: #f87171;
+        }
+
+        [data-theme="dark"] .tx-search {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .tx-filter-select {
+            background-color: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .period-btn {
+            background: #1e293b;
+            border-color: #334155;
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .period-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        [data-theme="dark"] .period-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: #fff;
+        }
+
+        [data-theme="dark"] .period-custom-wrap input[type="date"] {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .empty-state h3 {
+            color: #f1f5f9;
+        }
+
+        [data-theme="dark"] .empty-state p {
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .panel-error {
+            background: rgba(248,113,113,0.1);
+        }
+
+        [data-theme="dark"] .dash-loading-overlay {
+            background: rgba(15,23,42,0.85);
+        }
+
+        [data-theme="dark"] .dash-loading-overlay p {
+            color: #94a3b8;
+        }
+
+        [data-theme="dark"] .spinner {
+            border-color: #334155;
+            border-top-color: #3b82f6;
+        }
+
+        [data-theme="dark"] #theme-toggle {
+            background: #1e293b !important;
+            color: #f1f5f9 !important;
+            border: 1px solid #334155 !important;
+        }
+
+        /* ================================================================
            RESPONSIVE — 992px (Tablet landscape)
         ================================================================ */
         @media (max-width: 992px) {
@@ -1893,6 +2088,7 @@
     </div>
 
     <!-- Application Script Logic -->
+    <script src="/js/theme.js"></script>
     <script src="/js/api.js"></script>
     <script>
         // ============================================================
