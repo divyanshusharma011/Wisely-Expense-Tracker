@@ -235,8 +235,17 @@
                 <p>A customizable dashboard that puts everything you need right at your fingertips.</p>
             </div>
             <div class="preview-wrapper">
-                <img src="..//assets/dashboard-preview.png" data-video="..//assets/dashboard-preview.webp" alt="Wisely Dashboard Preview" class="preview-img"
-                    id="preview-img" style="cursor: pointer;">
+                <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="preview-img"
+                    style="width:100%;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.15);">
+                    <source src="/assets/dashboard-demo.mp4" type="video/mp4">
+                    <!-- Fallback image if video not supported -->
+                    <img src="/assets/dashboard-preview.png" alt="Wisely Dashboard Preview" class="preview-img">
+                </video>
                 <div class="preview-glow"></div>
             </div>
         </div>
@@ -442,5 +451,6 @@
 </body>
 
 </html>
+
 
 
