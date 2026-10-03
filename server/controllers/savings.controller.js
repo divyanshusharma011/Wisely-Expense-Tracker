@@ -62,12 +62,12 @@ function create(req, res) {
             'INSERT INTO savings_goals (user_id, name, target_amount, target_date) VALUES (?, ?, ?, ?)',
             [userId, name.trim(), parseFloat(target_amount), target_date || null]
         );
-        persist();
 
         const [goal] = queryAll(db,
             'SELECT * FROM savings_goals WHERE rowid = last_insert_rowid() AND user_id = ? LIMIT 1',
             [userId]
         );
+        persist();
 
         return res.status(201).json({
             success: true,

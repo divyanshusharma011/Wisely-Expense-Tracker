@@ -113,13 +113,13 @@ function create(req, res) {
              VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [userId, type, parseFloat(amount), (description || '').trim(), category, payment_method, transaction_date]
         );
-        persist();
 
-        // Return the created row using last_insert_rowid()
+        // Return the created row before persist() since db.export() resets last_insert_rowid()
         const [tx] = queryAll(db,
             'SELECT * FROM transactions WHERE rowid = last_insert_rowid() AND user_id = ? LIMIT 1',
             [userId]
         );
+        persist();
 
         return res.status(201).json({
             success: true,

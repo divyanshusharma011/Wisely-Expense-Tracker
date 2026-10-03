@@ -113,12 +113,12 @@ function create(req, res) {
             'INSERT INTO budgets (user_id, category, amount, month, year) VALUES (?, ?, ?, ?, ?)',
             [userId, category, parseFloat(amount), parseInt(month, 10), parseInt(year, 10)]
         );
-        persist();
 
         const [budget] = queryAll(db,
             'SELECT * FROM budgets WHERE rowid = last_insert_rowid() AND user_id = ? LIMIT 1',
             [userId]
         );
+        persist();
 
         return res.status(201).json({
             success: true,
