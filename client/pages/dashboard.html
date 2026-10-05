@@ -770,6 +770,36 @@
             border-color: var(--border) !important;
         }
 
+        /* Target every select by ID — override inline styles completely */
+        [data-theme="dark"] #tx-type,
+        [data-theme="dark"] #tx-category,
+        [data-theme="dark"] #tx-payment,
+        [data-theme="dark"] #budget-category,
+        [data-theme="dark"] #budget-month,
+        [data-theme="dark"] #budget-year,
+        [data-theme="dark"] #filter-type,
+        [data-theme="dark"] #filter-category,
+        [data-theme="dark"] #filter-payment,
+        [data-theme="dark"] #sort-by {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+            color-scheme: dark;
+        }
+
+        [data-theme="dark"] #tx-type option,
+        [data-theme="dark"] #tx-category option,
+        [data-theme="dark"] #tx-payment option,
+        [data-theme="dark"] #budget-category option,
+        [data-theme="dark"] #budget-month option,
+        [data-theme="dark"] #filter-type option,
+        [data-theme="dark"] #filter-category option,
+        [data-theme="dark"] #filter-payment option,
+        [data-theme="dark"] #sort-by option {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+        }
+
         [data-theme="dark"] .btn-logout {
             background: #1e293b;
             border-color: #334155;
