@@ -78,6 +78,7 @@ const { initDatabase } = require('./server/db/database');
         app.use('/api/budgets',      require('./server/routes/budgets.routes'));
         app.use('/api/savings',      require('./server/routes/savings.routes'));
         app.use('/api/dashboard',    require('./server/routes/dashboard.routes'));
+        app.use('/api/sms',          require('./server/routes/sms.routes'));
 
         // Google OAuth routes (not under /api — browser redirects)
         app.use('/auth/google',      require('./server/routes/google.routes'));
